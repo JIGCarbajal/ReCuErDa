@@ -27,7 +27,7 @@ int main() {
 		case 2:{
 			do{
 				opc2 = menu.baseDeProblemas();
-				switch(opc2){
+				switch(opc2){// Opciones para la base de datos
 
 				case 1:// Mostrar/Ver problemas
 					cout << "Hay " << dB.buscaFinProblemas()-1 << " problemas" << endl;
