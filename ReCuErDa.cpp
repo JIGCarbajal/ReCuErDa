@@ -1,9 +1,9 @@
 //============================================================================
 // Name        : ReCuErDa.cpp
 // Author      : José Isaac González Carbajal
-// Version     :
-// Copyright   : 
-// Description : Hello World in C++, Ansi-style
+// Version     : 1.0
+// Description : Program to practice the concepts of physics, chemistry and
+// 				 Mathematics
 //============================================================================
 
 #include <iostream>
@@ -15,36 +15,33 @@ int main() {
 	Menu menu; // Instancia de la clase Menu
 	DataBase dB;// Instancia de la base de Problemas
 
-	int opc1, opc2;
-	int opc;
-	string buf;
+	int opc1, opc2; // opciones para los menús
+	string buf;		// variable para meter "basura"
 
 	do{
-		opc1 = menu.principal();
+		opc1 = menu.principal(); // Menú Principal
+		switch(opc1){ // opciones del menú principal
 
-		switch(opc1){
-
-		case 2:{
+		case 1:{ // Practicar!
+			menu.practicar(dB,menu.categoria());
+			break;
+		}
+		case 2:{ // Operaciones en la base de datos
 			do{
-				opc2 = menu.baseDeProblemas();
-				switch(opc2){// Opciones para la base de datos
+				opc2 = menu.baseDeProblemas(); // Menú de la base de datos de problemas
+				switch(opc2){ // opciones del menú de datos
 
-				case 1:// Mostrar/Ver problemas
-					cout << "Hay " << dB.buscaFinProblemas()-1 << " problemas" << endl;
-					cout << "introduce el problema que quieres ver" << endl;
-					cin >> opc;
-					cout << dB.getProblem(opc) << endl;
+				case 1:// Resolver problemas
+					if(menu.resolverProblema(dB, menu.categoria()))
+						cout << "Correcto" << endl;
+					else
+						cout << "Incorrecto" << endl;
 					break;
 				case 2:// Agregar Problemas
-					cout << "Hay " << dB.buscaFinProblemas()-1 << " problemas" << endl;
-					cout << "Agregando problema numero " << dB.buscaFinProblemas() << endl;
-					dB.setProblem();
+					menu.agregarProblema(dB, menu.categoria());
 					break;
 				case 3:// Eliminar Problemas
-					cout << "Hay " << dB.buscaFinProblemas()-1 << " problemas" << endl;
-					cout << "Introduce el numero del archivo a borrar:" << endl;
-					cin >> opc;
-					dB.eraseProblem(opc);
+					menu.eliminarProblema(dB, menu.categoria());
 					break;
 				case 0:
 					break;
@@ -54,7 +51,7 @@ int main() {
 			}while(opc2 != 0);
 			break;
 		}
-		case 0:
+		case 0: // Salir
 			break;
 		default:
 			cout << "Opcion inválida" << endl;
@@ -63,8 +60,7 @@ int main() {
 
 		}
 
-
-	}while(opc1 != 0);
+	}while(opc1 != 0); // mientras no se presione salir
 
 	return 0;
 }
